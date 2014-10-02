@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#define pi=3.141592653
 
 double pi(int count)
 {
@@ -21,13 +22,16 @@ double pi(int count)
 
 int main()
 {
+	double temp=0;
 	srand(time(NULL));
-	printf("When count=100, Pi is %f\n", pi(100));
-	printf("When count=1000, Pi is %f\n", pi(1000));
-	printf("When count=10000, Pi is %f\n", pi(10000));
-	printf("When count=100000, Pi is %f\n", pi(100000));
-	printf("When count=1000000, Pi is %f\n", pi(1000000));
-	printf("When count=10000000, Pi is %f\n", pi(10000000));
+	temp=pi(100);
+	printf("When count=100, Pi is %f, and error is %f\n", temp,(temp-pi)/pi);
+	temp=pi(1000);
+	printf("When count=1000, Pi is %f, and error is %f\n", temp,(temp-pi)/pi);
+	temp=pi(10000);
+	printf("When count=10000, Pi is %f, and error is %f\n", temp,(temp-pi)/pi);
+	temp=pi(100000);
+	printf("When count=100000, Pi is %f, and error is %f\n", temp,(temp-pi)/pi);
 	return 0;
 	return 0;
 }
