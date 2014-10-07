@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <math.h>
+#include <time.h>
 #define pi 3.141592653
 
 struct position
@@ -14,7 +14,6 @@ struct position
 int Z=0;
 double E=0;
 int A=0;
-double R=10;
 
 double irand()
 {
@@ -53,26 +52,26 @@ double cospsi()
 
 double sinpsi()
 {
-	return pow(1-cospsi(),1/2);
+	return Pow(1-cospsi(),1/2);
 }
 
 double perenergyloss()
 {
-	double J=(9.76*79+58.5/pow(Z,0.19))*pow(10,-3);
+	double J=(9.76*79+58.5/(Z^(0.19)))*pow(10,-3);
 	return -78500*196.9665*Z/A/E*log(1.166*E/J+1);
 }
 
 double totalenergyloss()
 {
 	
-	double totald=step()+R/sinpsi();
+	double totald=step()+R/sinphi();
 	return totald*perenergyloss();
 }
 
 int main()
 {
 	double totald=0;
-	//position *p=(position*) malloc(10 * sizeof(position));
+	position *p=(position*) malloc(10 * sizeof(position));
 	Z=79;
 	double Ec=10000;
 	A=117;
@@ -85,7 +84,7 @@ int main()
 		//printf("%f\n",step());
 		//printf("%f",phi());
 		printf("step here is %f\n",step());
-		printf("scattering angle here is %f\n",acos(cospsi()));
+		printf("scattering angle here is %f\n",arccos(cosphi()));
 		printf("energy loss is %f\n",totalenergyloss());
 	}
 	
