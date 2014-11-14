@@ -10,7 +10,7 @@ int main (void)
 {
 	int rank,size;
 	char *string;
-	int target=0;
+	int target;
 	//int j=CORE_SZ;
 	//string =malloc(STRING_SZ * sizeof(char));
 	string="TAG! You're it!";
@@ -21,23 +21,18 @@ int main (void)
 	//target=rand()%size;
 	//printf("%d\n",target);
 	
-	
 	if(rank==0)
 	{
 		//snprintf(string,sizeof(string),"%s",string_temp);
-		//target=rand()%size;
-		target=1;
+		target=rand()%size;
 		printf("Game start, there are %d player, rank 0 will send it to %d\n",size,target);
 		MPI_Send(&string,STRING_SZ,MPI_CHAR,target,1,MPI_COMM_WORLD);
-		//getchar();
 	}
-	printf("I'm rank %d, I'm waiting~\n",rank);
-	//getchar();
+	
 	MPI_Recv(&string,STRING_SZ,MPI_CHAR,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,NULL);
-	target=rank+1;
+	target=rank+1;;
 	if(target>size-1)
 		target=0;
-	printf("test, rank %d, target %d\n",rank,target);
 	printf("%s, I'm rank %d, I will send it to %d \n",string,rank,target);
 	MPI_Send(&string,STRING_SZ,MPI_CHAR,target,1,MPI_COMM_WORLD);
 	MPI_Finalize();
